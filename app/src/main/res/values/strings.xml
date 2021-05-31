@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ByjusNewApp</string>
+    <string name="base_url">https://newsapi.org/v2/</string>
 </resources>
