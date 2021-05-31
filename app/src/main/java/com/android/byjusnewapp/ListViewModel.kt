@@ -4,20 +4,20 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.android.byjusnewapp.models.Articles
+import com.android.byjusnewapp.viewmodel.MyBaseViewModel
 import com.resmed.mynight.managers.utils.RetrofitManager
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class ListViewModel(application: Application) : AndroidViewModel(application) {
+class ListViewModel(application: Application) : MyBaseViewModel(application) {
 
     val listLiveData: MutableLiveData<ArrayList<Articles>> = MutableLiveData()
-    val errorLiveData : MutableLiveData<String> = MutableLiveData()
-
 
     fun getList(source : String , apiKey : String){
-        CoroutineScope(getApplication()).launch {
-            val request =
-                RetrofitManager.getInstance(getApplication()).getTechSearchApi().getList(source, apiKey)
+        CoroutineScope(exceptionHandler).launch {
+            val request = RetrofitManager.getInstance(getApplication()).getTechSearchApi().getList(source, apiKey)
             val response = request.await()
 
             if (response.isSuccessful){

@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.ContextWrapper
 import com.android.byjusnewapp.R
 import com.android.byjusnewapp.managers.Interface.TechSearchApiInterface
+import com.android.byjusnewapp.models.Response
+import com.android.byjusnewapp.models.response.ListApiResponse
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
@@ -16,7 +18,6 @@ import java.util.concurrent.TimeUnit
 class RetrofitManager(context: Context) : ContextWrapper(context) {
 
     companion object {
-        private val api_key: String = "2Ik7JCwjBD91wMeOydJyj9xAn6tyKP3m5oVH3wqM"
         private var INSTANCE: RetrofitManager? = null
         private lateinit var defaultRetrofit: Retrofit
         private var userRetrofit: Retrofit? = null
@@ -35,7 +36,6 @@ class RetrofitManager(context: Context) : ContextWrapper(context) {
                 val request = chain.request().newBuilder()
                     .header("Accept", "*/*")
                     .header("Content-Type" ,"application/json")
-                    .header("x-api-key", api_key)
                     .build()
 
                 chain.proceed(request)
@@ -53,7 +53,7 @@ class RetrofitManager(context: Context) : ContextWrapper(context) {
 
 
             val gson = GsonBuilder()
-
+                .registerTypeAdapter(ListApiResponse::class.java,ListApiResponse.ListDeserializer())
                 .create()
 
             defaultRetrofit = Retrofit.Builder()

@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface TechSearchApiInterface {
 
-    @GET("/top-headlines/?{sources}/&{apiKey}")
-    fun getList(@Path("sources") sources : String,@Field("apiKey") apikey : String) : Deferred<Response<ListApiResponse>>
+    @GET("v2/top-headlines")
+    fun getList(@Query("sources") sources : String,@Query("apiKey") apikey : String) : Deferred<Response<ListApiResponse>>
 
 }
