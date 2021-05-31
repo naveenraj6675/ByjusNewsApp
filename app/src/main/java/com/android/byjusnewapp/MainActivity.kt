@@ -27,7 +27,7 @@ class MainActivity : MyAppCompatActivity() {
     override fun initObservers() {
         listViewModel.listLiveData.observe(this, Observer {
             if (it != null && it.size > 0){
-                showSnackbar("Have data")
+
             }
         })
     }

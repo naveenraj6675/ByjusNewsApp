@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TextViewBase -->
+    <style name="TextView.Base" parent="android:Widget.TextView"/>
+
+    <!--29sp -->
+    <style name="TextView.29SP" parent="TextView.Base">
+       <item name="android:textSize">29sp</item>
+    </style>
+
+    <style name="TextView.29SP.RobotoSlab.Bold" parent="TextView.29SP">
+        <item name="fontFamily">@font/roboto_slab_bold</item>
+    </style>
+
+    <style name="TextView.29SP.RobotoSlab.Bold.White" parent="TextView.29SP">
+        <item name="fontFamily">@font/roboto_slab_bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextView.29SP.RobotoSlab.Bold.TitleWhite" parent="TextView.29SP">
+        <item name="fontFamily">@font/roboto_slab_bold</item>
+        <item name="android:textColor">@color/titleTextColor</item>
+    </style>
+
+    <!--20sp -->
+    <style name="TextView.20SP" parent="TextView.Base">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextView.20SP.RobotoSlab.Regular" parent="TextView.20SP">
+        <item name="fontFamily">@font/roboto_slab_regular</item>
+    </style>
+
+    <style name="TextView.20SP.RobotoSlab.Regular.TitleWhite" parent="TextView.20SP.RobotoSlab.Regular">
+        <item name="android:textColor">@color/titleTextColor</item>
+    </style>
+
+
+    <!--14sp -->
+    <style name="TextView.14SP" parent="TextView.Base">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextView.14SP.RobotoSlab.Regular" parent="TextView.14SP">
+        <item name="fontFamily">@font/roboto_slab_regular</item>
+    </style>
+
+    <style name="TextView.14SP.RobotoSlab.Regular.AuthorColor" parent="TextView.14SP.RobotoSlab.Regular">
+        <item name="android:textColor">@color/authorColor</item>
+    </style>
+
+
+    <!--12sp -->
+    <style name="TextView.12SP" parent="TextView.Base">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextView.12SP.RobotoSlab.Regular" parent="TextView.12SP">
+        <item name="fontFamily">@font/roboto_slab_regular</item>
+    </style>
+
+    <style name="TextView.12SP.RobotoSlab.Regular.AuthorColor" parent="TextView.12SP.RobotoSlab.Regular">
+        <item name="android:textColor">@color/authorColor</item>
+    </style>
+
+
+
+</resources>
