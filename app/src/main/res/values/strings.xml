@@ -5,6 +5,8 @@
     <string name="ok">OK</string>
 
 
+    <!--MainActivity-->
+    <string name="headline">Headlines</string>
 
 
 </resources>

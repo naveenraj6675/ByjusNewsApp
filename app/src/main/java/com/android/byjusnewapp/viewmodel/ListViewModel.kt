@@ -1,4 +1,4 @@
-package com.android.byjusnewapp
+package com.android.byjusnewapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -22,13 +22,11 @@ class ListViewModel(application: Application) : MyBaseViewModel(application) {
 
             if (response.isSuccessful){
                 val apiResponse = response.body()!!
-
                 if (apiResponse.response?.status == "ok"){
                     listLiveData.postValue(apiResponse.response?.articlesList)
                 }else{
                     errorLiveData.postValue(apiResponse.response?.message)
                 }
-
             }
         }
     }

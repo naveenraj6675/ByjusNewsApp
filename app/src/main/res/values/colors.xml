@@ -15,4 +15,9 @@
     <color name="white">#ffffff</color>
     <color name="titleTextColor">#f2f2f2</color>
     <color name="authorColor">#bababa</color>
+
+
+    <color name="primary_transparent">#BC000000</color>
+
+
 </resources>
