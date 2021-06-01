@@ -1,19 +1,12 @@
 package com.android.byjusnewapp.views.base
 
 import android.app.Activity
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.telephony.TelephonyManager
 import android.text.SpannableStringBuilder
-import android.text.TextUtils
-import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -22,7 +15,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
 import com.android.byjusnewapp.R
 import com.android.byjusnewapp.enums.LoaderStatus
@@ -58,10 +50,10 @@ abstract class MyAppCompatActivity : AppCompatActivity() {
     //To hide Keyboard
     fun hideKeyboard() {
         val inputMethodManager =
-            this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager;
-        val view = this.currentFocus;
+            this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val view = this.currentFocus
         if (view != null)
-            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0);
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     //To show keyboard
@@ -86,7 +78,7 @@ abstract class MyAppCompatActivity : AppCompatActivity() {
             findViewById(android.R.id.content), snackbarMessage,
             Snackbar.LENGTH_LONG
         )
-        snackbar.setDuration(2000)
+        snackbar.duration = 2000
         val snackBarView = snackbar.view
         val snackBarBg = R.color.primaryVariant
         val snackBarTextColor = R.color.onError
@@ -240,18 +232,6 @@ abstract class MyAppCompatActivity : AppCompatActivity() {
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworkInfo = connectivityManager.activeNetworkInfo
         return activeNetworkInfo != null && activeNetworkInfo.isConnected
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
 }

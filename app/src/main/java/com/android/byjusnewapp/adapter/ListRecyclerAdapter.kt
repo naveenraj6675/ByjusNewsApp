@@ -15,6 +15,8 @@ import org.w3c.dom.Text
 
 class ListRecyclerAdapter (var context : Context ,var mNewsList : ArrayList<Articles>): RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder>() {
 
+    var onItemClicked : ((Articles) -> Unit) ?= null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -42,5 +44,13 @@ class ListRecyclerAdapter (var context : Context ,var mNewsList : ArrayList<Arti
         var authorNameTV : TextView = view.findViewById(R.id.author_name_tv)
         var publishDataTV : TextView = view.findViewById(R.id.publish_date_tv)
         var backgroundIV : ImageView = view.findViewById(R.id.card_bg)
+
+        init {
+            view.setOnClickListener {
+                onItemClicked?.invoke(mNewsList[adapterPosition])
+            }
+        }
+
+
     }
 }

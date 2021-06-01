@@ -9,25 +9,22 @@
 
     <TextView
         android:id="@+id/titleTV"
+        style="@style/TextView.29SP.RobotoSlab.Bold.White"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center"
         android:background="@color/primary"
-        android:textAllCaps="true"
+        android:gravity="center"
         android:letterSpacing=".1"
-        style="@style/TextView.29SP.RobotoSlab.Bold.White"
-        android:text="@string/headline"/>
+        android:text="@string/headline"
+        android:textAllCaps="true"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTV"/>
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/titleTV" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

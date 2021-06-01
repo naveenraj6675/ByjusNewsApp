@@ -2,11 +2,11 @@
 <resources>
 
     <!-- TextViewBase -->
-    <style name="TextView.Base" parent="android:Widget.TextView"/>
+    <style name="TextView.Base" parent="android:Widget.TextView" />
 
     <!--29sp -->
     <style name="TextView.29SP" parent="TextView.Base">
-       <item name="android:textSize">29sp</item>
+        <item name="android:textSize">29sp</item>
     </style>
 
     <style name="TextView.29SP.RobotoSlab.Bold" parent="TextView.29SP">
@@ -63,6 +63,7 @@
     <style name="TextView.12SP.RobotoSlab.Bold" parent="TextView.12SP">
         <item name="fontFamily">@font/roboto_slab_bold</item>
     </style>
+
     <style name="TextView.12SP.RobotoSlab.Regular.AuthorColor" parent="TextView.12SP.RobotoSlab.Regular">
         <item name="android:textColor">@color/authorColor</item>
     </style>

@@ -1,6 +1,7 @@
 package com.android.byjusnewapp.views.main
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
@@ -8,7 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.byjusnewapp.R
 import com.android.byjusnewapp.adapter.ListRecyclerAdapter
+import com.android.byjusnewapp.constants.ExtraIntents
 import com.android.byjusnewapp.databinding.ActivityMainBinding
+import com.android.byjusnewapp.helpers.JsonUtils
 import com.android.byjusnewapp.models.Articles
 import com.android.byjusnewapp.viewmodel.ListViewModel
 import com.android.byjusnewapp.views.base.MyAppCompatActivity
@@ -17,6 +20,7 @@ class MainActivity : MyAppCompatActivity() {
 
     private lateinit var mListAdapter : ListRecyclerAdapter
     private var mNewsList :  ArrayList<Articles> = ArrayList()
+    private var mLocalList : ArrayList<Articles> = ArrayList()
     private val listViewModel: ListViewModel by lazy {
         ViewModelProvider(this).get(ListViewModel::class.java)
     }
@@ -43,8 +47,18 @@ class MainActivity : MyAppCompatActivity() {
                 mNewsList.addAll(it)
 
                 if (mNewsList.size > 0){
-                    mNewsList.forEach {
-                        listViewModel.addArticles(it)
+                    mNewsList.forEach { serverList ->
+                        if (mLocalList.isEmpty()){
+                            listViewModel.addArticles(serverList)
+                        }else{
+                            mLocalList.forEach {  localList ->
+                                if (serverList.title == localList.title){
+                                    listViewModel.updateArticles(serverList)
+                                }else{
+                                    listViewModel.addArticles(serverList)
+                                }
+                            }
+                        }
                     }
                 }
                 if (::mListAdapter.isInitialized){
@@ -56,18 +70,23 @@ class MainActivity : MyAppCompatActivity() {
 
         listViewModel.localArticleData.observe(this, Observer {
                 if (it.isNotEmpty() ){
-                    if (mNewsList.size > 0)
-                        mNewsList.clear()
+                    mLocalList.addAll(it)
+                    if (!isNetworkAvailable()){
+                        if (mNewsList.size > 0)
+                            mNewsList.clear()
 
-                    mNewsList.addAll(it)
-
-                    if (::mListAdapter.isInitialized){
+                        mNewsList.addAll(it)
                         mListAdapter.notifyDataSetChanged()
+
+                    }else{
+                        it.forEach {
+
+                        }
                     }
                 }else{
                     if (!isNetworkAvailable()){
                         showConfirmation("Cancel","trun on","No Internet connection","Please turn on your internet to continue",DialogInterface.OnClickListener { dialogInterface, i ->
-                            listViewModel.getList("techcrunch",getString(R.string.api_key))
+                            getList()
                         })
                     }
                 }
@@ -77,14 +96,22 @@ class MainActivity : MyAppCompatActivity() {
     private fun initViews(){
 
         if (isNetworkAvailable()){
-            listViewModel.getList("techcrunch",getString(R.string.api_key))
+           getList()
         }
 
         mListAdapter = ListRecyclerAdapter(this,mNewsList)
         binding.listRV.layoutManager = LinearLayoutManager(this)
         binding.listRV.adapter = mListAdapter
 
+        mListAdapter.onItemClicked = {
+            val intent = Intent(this,DetailActivity::class.java)
+            intent.putExtra(ExtraIntents.ARTICLE_ITEM,JsonUtils.toJson(it))
+            startActivity(intent)
+        }
+
     }
-
-
+    
+    private fun getList(){
+        listViewModel.getList("techcrunch",getString(R.string.api_key))
+    }
 }

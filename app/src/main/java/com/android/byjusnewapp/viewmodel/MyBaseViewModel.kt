@@ -6,14 +6,10 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.byjusnewapp.enums.LoaderStatus
 import com.android.byjusnewapp.repositories.HeadlineRepository
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import org.json.JSONObject
-import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
 open class MyBaseViewModel(application: Application) : AndroidViewModel(application),
@@ -38,7 +34,7 @@ open class MyBaseViewModel(application: Application) : AndroidViewModel(applicat
         exception.printStackTrace()
     }
 
-    val headlineRepository : HeadlineRepository by lazy {
+    val headlineRepository: HeadlineRepository by lazy {
         HeadlineRepository.getInstance(application)
     }
 

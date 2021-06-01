@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".views.main.DetailActivity">
+
+
+    <ImageView
+        android:id="@+id/backgroundIV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_rectangle_gradient_black" />
+
+
+    <ImageView
+        android:id="@+id/backIV"
+        android:layout_width="@dimen/width_42x"
+        android:layout_height="@dimen/height_42x"
+        android:layout_margin="@dimen/margin_10x"
+        android:background="@drawable/shape_circle_transparent_bg"
+        android:padding="@dimen/padding_8x"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16x"
+        android:layout_marginEnd="@dimen/margin_16x"
+        android:layout_marginBottom="@dimen/margin_16x"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/title_tv"
+            style="@style/TextView.29SP.RobotoSlab.Bold.TitleWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8x"
+            android:layout_marginBottom="@dimen/margin_64x"
+            android:ellipsize="end"
+            android:maxLines="3"
+            app:layout_constraintBottom_toTopOf="@+id/authorNameTV" />
+
+
+        <TextView
+            android:id="@+id/authorNameTV"
+            style="@style/TextView.20SP.RobotoSlab.Regular.TitleWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16x"
+            app:layout_constraintBottom_toTopOf="@+id/descriptionTV"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/publishDateTV"
+            style="@style/TextView.20SP.RobotoSlab.Regular.TitleWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16x"
+            app:layout_constraintBottom_toTopOf="@+id/descriptionTV"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <TextView
+            android:id="@+id/descriptionTV"
+            style="@style/TextView.14SP.RobotoSlab.Regular.AuthorColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10x"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
