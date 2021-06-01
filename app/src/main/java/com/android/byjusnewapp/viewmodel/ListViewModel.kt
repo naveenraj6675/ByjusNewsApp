@@ -2,6 +2,7 @@ package com.android.byjusnewapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.android.byjusnewapp.enums.LoaderStatus
 import com.android.byjusnewapp.models.Articles
 import com.resmed.mynight.managers.utils.RetrofitManager
 import kotlinx.coroutines.CoroutineScope
@@ -14,6 +15,7 @@ class ListViewModel(application: Application) : MyBaseViewModel(application) {
     val listLiveData: MutableLiveData<ArrayList<Articles>> = MutableLiveData()
 
     fun getList(source: String, apiKey: String) {
+        isLoading.postValue(LoaderStatus.loading)
         CoroutineScope(exceptionHandler).launch {
             val request = RetrofitManager.getInstance(getApplication()).getTechSearchApi()
                 .getList(source, apiKey)
@@ -26,6 +28,7 @@ class ListViewModel(application: Application) : MyBaseViewModel(application) {
                 } else {
                     errorLiveData.postValue(apiResponse.response?.message)
                 }
+                isLoading.postValue(LoaderStatus.success)
             }
         }
     }
