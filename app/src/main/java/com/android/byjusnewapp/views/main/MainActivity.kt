@@ -1,5 +1,6 @@
 package com.android.byjusnewapp.views.main
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
@@ -41,19 +42,49 @@ class MainActivity : MyAppCompatActivity() {
 
                 mNewsList.addAll(it)
 
+                if (mNewsList.size > 0){
+                    mNewsList.forEach {
+                        listViewModel.addArticles(it)
+                    }
+                }
                 if (::mListAdapter.isInitialized){
                     mListAdapter.notifyDataSetChanged()
                 }
             }
         })
+
+
+        listViewModel.localArticleData.observe(this, Observer {
+                if (it.isNotEmpty() ){
+                    if (mNewsList.size > 0)
+                        mNewsList.clear()
+
+                    mNewsList.addAll(it)
+
+                    if (::mListAdapter.isInitialized){
+                        mListAdapter.notifyDataSetChanged()
+                    }
+                }else{
+                    if (!isNetworkAvailable()){
+                        showConfirmation("Cancel","trun on","No Internet connection","Please turn on your internet to continue",DialogInterface.OnClickListener { dialogInterface, i ->
+                            listViewModel.getList("techcrunch",getString(R.string.api_key))
+                        })
+                    }
+                }
+        })
     }
 
     private fun initViews(){
-        listViewModel.getList("techcrunch",getString(R.string.api_key))
+
+        if (isNetworkAvailable()){
+            listViewModel.getList("techcrunch",getString(R.string.api_key))
+        }
 
         mListAdapter = ListRecyclerAdapter(this,mNewsList)
         binding.listRV.layoutManager = LinearLayoutManager(this)
         binding.listRV.adapter = mListAdapter
 
     }
+
+
 }

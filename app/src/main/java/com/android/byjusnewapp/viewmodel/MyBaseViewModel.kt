@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.byjusnewapp.enums.LoaderStatus
+import com.android.byjusnewapp.repositories.HeadlineRepository
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -35,6 +36,10 @@ open class MyBaseViewModel(application: Application) : AndroidViewModel(applicat
         isLoading.postValue(LoaderStatus.failed)
         errorLiveData.postValue(exception.message)
         exception.printStackTrace()
+    }
+
+    val headlineRepository : HeadlineRepository by lazy {
+        HeadlineRepository.getInstance(application)
     }
 
     init {

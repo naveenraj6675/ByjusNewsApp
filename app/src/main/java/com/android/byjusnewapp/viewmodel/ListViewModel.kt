@@ -13,6 +13,8 @@ import kotlin.coroutines.CoroutineContext
 
 class ListViewModel(application: Application) : MyBaseViewModel(application) {
 
+    val localArticleData = headlineRepository.articlesLiveData
+
     val listLiveData: MutableLiveData<ArrayList<Articles>> = MutableLiveData()
 
     fun getList(source : String , apiKey : String){
@@ -31,5 +33,11 @@ class ListViewModel(application: Application) : MyBaseViewModel(application) {
         }
     }
 
+    fun addArticles(data : Articles){
+        CoroutineScope(exceptionHandler).launch {
+             headlineRepository.addItems(data)
+
+        }
+    }
 
 }
